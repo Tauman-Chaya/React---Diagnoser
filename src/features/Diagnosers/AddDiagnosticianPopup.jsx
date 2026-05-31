@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addDiagnoser } from "./DiagnoserSlice";
+import { addDiagnoser, InitDiagnoser } from "./DiagnoserSlice";
 import styles from "./AddDiagnosticianPopup.module.css";
 
 function AddDiagnosticianPopup({ isOpen, onClose, onSave }) {
@@ -69,7 +69,7 @@ function AddDiagnosticianPopup({ isOpen, onClose, onSave }) {
     };
     const back = () => setStep(step - 1);
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         if (!isStepValid()) return;
 
         const payload = {
@@ -77,7 +77,8 @@ function AddDiagnosticianPopup({ isOpen, onClose, onSave }) {
             available: true
         };
 
-        dispatch(addDiagnoser(payload));
+        await dispatch(addDiagnoser(payload)).unwrap();
+        dispatch(InitDiagnoser())
         // onSave?.(payload);
         closeAll();
     };

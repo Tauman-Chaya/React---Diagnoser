@@ -94,6 +94,12 @@ const WorkshopResult = ({
                         <div className={styles.badge}>
                             קוד סדנה: {workshop.code}
                         </div>
+                         <div className={styles.capabilities}>
+                            {workshop.morfology && <span className={`${styles.badges} ${styles.morphology}`}>🧠 מורפולוגיה</span>}
+                            {workshop.grafology && <span className={`${styles.badges} ${styles.graphology}`}>✍️ גרפולוגיה</span>}
+                            {workshop.chirology && <span className={`${styles.badges} ${styles.chirology}`}>✋ כירולוגיה</span>}
+                        </div>
+
 
                         <h2 className={styles.title}>
                             📘 {workshop.description}

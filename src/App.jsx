@@ -2,9 +2,9 @@
 
 import React, { useState } from 'react';
 import { Routes, Route, NavLink } from "react-router-dom";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import styles from './App.module.css';
-
+import { RefreshCcw } from "lucide-react";
 // דפים
 import DiagnoserList from './features/Diagnosers/DiagnoserList';
 import CustomersList from './features/Customers/CustomersList';
@@ -24,8 +24,16 @@ import DiagnoserCalendar from './features/Calendar/DiagnoserCalendar';
 import WorkshopAI from './features/AI/WorkshopAI';
 import { UserCircle } from "lucide-react";
 import UserMenu from './features/SignIn/UserMenu';
+import { InitCustomer } from './features/Customers/CustomerSlice';
+import { InitDiagnoser } from './features/Diagnosers/DiagnoserSlice';
+import { InitLeads } from './features/Leads/LeadsSlice';
+import { InitReferences } from './features/References/ReferencesSlice';
+import { InitWorkShops } from './features/WorkShop/WorkShopSlice';
+import { logIn } from './features/SignIn/LogInSlice';
 
 function App() {
+  const dispatch = useDispatch()
+
   const statusUser = useSelector(state => state.LogIn.statusUser);
   const user = useSelector(state => state.LogIn.thisUser);
 
@@ -33,12 +41,28 @@ function App() {
   const location = useLocation();
   const authPaths = ["/enter", "/LogIn", "/SignIn"];
 
+  const handleRefresh = () => {
+    dispatch(InitCustomer())
+    dispatch(InitDiagnoser())
+    dispatch(InitLeads())
+    dispatch(InitWorkShops())
+    dispatch(InitReferences())
+  };
+
   return (
     <div>
       {/* ניווטים מופיעים רק אחרי לחיצה */}
       {hasAccess && (
         <nav>
-          {/* {user && <NavLink to="/Profile" className={({ isActive }) => isActive ? styles.active : styles.link} > <UserCircle size={28} /> </NavLink>} */}
+          <button
+            className={styles.refreshBtn}
+            onClick={handleRefresh}
+          >
+            <RefreshCcw size={18} />
+            רענון
+          </button>
+          {/* {user && <NavLink to="/Profile" className={({ isActive }) => is          protocol=https
+          host=github.comActive ? styles.active : styles.link} > <UserCircle size={28} /> </NavLink>} */}
           {user && <UserMenu />}
           {!user && (<NavLink to="/enter" className={({ isActive }) => (isActive || authPaths.includes(location.pathname)) ? styles.active : styles.link} > התחברות/הרשמות</NavLink>)}
           {(statusUser === "diagnoser" || statusUser === "Esty") && <NavLink to="/calendar" className={({ isActive }) => isActive ? styles.active : styles.link}>ליומן האישי</NavLink>}
@@ -71,7 +95,7 @@ function App() {
           <>
             {/* <Route path="/AI" element={<WorkshopAI />} /> */}
             <Route path="/enter" element={<LogIn />} />
-            <Route path="/AI" element={<WorkshopAI/>} />
+            <Route path="/AI" element={<WorkshopAI />} />
             <Route path="/Workshop" element={<Workshop />} />
             <Route path="/Customers" element={<CustomersList />} />
             <Route path="/Diagnosers" element={<DiagnoserList />} />

@@ -8,6 +8,7 @@ import { deleteLead } from '../Leads/LeadsSlice';
 import { addReference } from '../References/ReferencesSlice';
 import { sendEmail } from '../Email/EmailSlice';
 import { InitWorkShops } from './WorkShopSlice';
+import { AddPrice } from '../Diagnosers/DiagnoserSlice';
 
 function OrderWorkshop({ WorkShop, diagnoser, onClose }) {
 
@@ -56,11 +57,10 @@ function OrderWorkshop({ WorkShop, diagnoser, onClose }) {
             return;
         }
         try {
-            const existingCustomer = customers.find(c => c.code === customer.code);
+            const existingCustomer = customers.find(c => c.mail === customer.mail);
             if (!existingCustomer) {
                 await dispatch(deleteLead(customer)).unwrap();
-                const c = await dispatch(addCustomer(customer)).unwrap();
-                customer.code = c
+                await dispatch(addCustomer(customer)).unwrap();
             }
             const newReference = {
                 code: 0,
@@ -70,7 +70,7 @@ function OrderWorkshop({ WorkShop, diagnoser, onClose }) {
                     w.grafology === WorkShop.grafology &&
                     w.typeGroup === WorkShop.typeGroup
                 )?.code,
-                codeCustomer: customer.code,
+                codeCustomer: customers[customers.length-1].code+1,
                 date: bookingData.date.iso,
                 time: parseInt(bookingData.time.substring(0, 2)) +
                     (parseInt(bookingData.time.substring(3, 5)) * 1.0 / 100),
@@ -92,6 +92,7 @@ function OrderWorkshop({ WorkShop, diagnoser, onClose }) {
                 subject: mailSubject,
                 body: mailBody
             }));
+            dispatch(AddPrice({code: diagnoser.code, price: WorkShop.price*0.1}))
         }
         catch (error) {
             console.error("שגיאה בהזמנה:", error);

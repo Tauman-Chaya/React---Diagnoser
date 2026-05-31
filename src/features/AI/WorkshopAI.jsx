@@ -3,7 +3,9 @@ import {
   GetAIQuestions,
   ResetAIState,
   SendAnswersToAI,
-  SetAnswer
+  SetAnswer,
+  SetMode,
+  SetResultType
 } from "./WorkshopAISlice";
 
 import { useEffect, useState, useRef } from "react";

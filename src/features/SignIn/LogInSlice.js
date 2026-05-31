@@ -56,7 +56,7 @@ const LogInSlice = createSlice({
             }
             else {
                 const diagnoser = Diagnosers.find(c => c.mail == user.mail && c.password == user.password)
-                if (diagnoser != null && diagnoser.mail == "22@2") {
+                if (diagnoser != null && diagnoser.mail == "st0527144149@gmail.com") {
                     state.statusUser = "Esty"
                     state.thisUser = diagnoser
                 }

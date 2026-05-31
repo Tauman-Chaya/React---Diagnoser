@@ -66,6 +66,10 @@ const DiagnoserSlice = createSlice({
     name: "diagnoser",
     initialState,
     reducers: {
+        AddPrice:(state, action)=>{
+            const d = state.Diagnosers.find(d=>d.code==action.payload.code)
+            d.precentagePayment+=action.payload.price
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -80,7 +84,7 @@ const DiagnoserSlice = createSlice({
                 state.status = "faild"
             })
             .addCase(addDiagnoser.fulfilled, (state, action) => {
-                state.status = "succesfull";
+                state.status = "";
                 const diagnoser = action.payload;
                 state.Diagnosers =[...state.Diagnosers,diagnoser] //state.Diagnosers.push(diagnoser)
             })
@@ -103,4 +107,5 @@ const DiagnoserSlice = createSlice({
     }
 })
 
+export const { AddPrice } = DiagnoserSlice.actions;
 export default DiagnoserSlice.reducer;

@@ -39,7 +39,7 @@ export const SendAnswersToAI = createAsyncThunk(
             answer3: answers[2],
             answer4: answers[3],
             answer5: answers[4]
-    };
+        };
         try {
             const res = await axios.post(
                 `https://localhost:7082/api/AI/recommend/${type}`,
@@ -121,7 +121,8 @@ const WorkshopAISlice = createSlice({
                 } else {
 
                     state.questions = action.payload;
-                })
+                }
+            })
             .addCase(GetAIQuestions.rejected, (state) => {
                 state.loading = false;
                 state.error = "error";

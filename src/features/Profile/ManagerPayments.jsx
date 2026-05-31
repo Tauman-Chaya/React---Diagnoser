@@ -114,7 +114,7 @@ const ManagerPayments = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {filteredSlots.filter(d => d.mail !== "22@2").map((d, i) => (
+                        {filteredSlots.filter(d => d.mail !== "st0527144149@gmail.com").map((d, i) => (
                             <tr
                                 key={i}
                                 className={Number(d.precentagePayment) > 10000 ? styles["red-row"] : ""}
