@@ -22,7 +22,7 @@ import LoginRequiredModal from "./LoginRequiredModal";
 import DiagnoserResult from "./DiagnoserResult ";
 
 
-const WorkshopAI = () => {
+const WorkshopAI = ({ sidebarOpen, sidebarInputRef, externalMode }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -147,6 +147,15 @@ const WorkshopAI = () => {
     }, 400);
   };
 
+  useEffect(() => {
+    // If parent (sidebar) requested a mode, load it
+    if (externalMode) {
+      if (!open || mode !== externalMode) {
+        loadQuestions(externalMode);
+      }
+    }
+  }, [externalMode]);
+
   // =========================
   // התאמת תוצאה
   // =========================
@@ -211,31 +220,6 @@ const WorkshopAI = () => {
   return (
     <div className={style.safeAIPage}>
       <div className={style.chatContainer}>
-
-        {/* ================= בחירה ראשונית ================= */}
-        {(
-          <div className={style.chatHeader}>
-            <h1 className={style.chatTitle}>בחר סוג חיפוש</h1>
-
-            <div className={style.modeButtons}>
-
-              <button
-                className={`${style.modeBtn} ${style.modeBtnWorkshop}`}
-                onClick={() => loadQuestions("workshop")}
-              >
-                🔍 חיפוש מהיר של סדנה
-              </button>
-
-              <button
-                className={`${style.modeBtn} ${style.modeBtnDiagnoser}`}
-                onClick={() => loadQuestions("diagnoser")}
-              >
-                👤 חיפוש מהיר של מאבחנת
-              </button>
-
-            </div>
-          </div>
-        )}
 
         {/* ================= מערכת חושבת ================= */}
         {loadingMode && (

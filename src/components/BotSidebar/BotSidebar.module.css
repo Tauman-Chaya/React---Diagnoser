@@ -1,0 +1,207 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap');
+
+:root{
+  --bot-width: 360px;
+  --accent: #2563eb;
+}
+.container{
+  position: fixed;
+  right: 20px;
+  bottom: 24px;
+  z-index: 1200;
+  display:flex;
+  align-items:flex-end;
+  gap:12px;
+  pointer-events: none; /* disable pointer events when fully closed */
+}
+.button{
+  position: fixed; /* fixed to viewport so it doesn't affect layout */
+  left: 16px; /* distance from viewport left edge */
+  bottom: 16px; /* distance from viewport bottom edge */
+  width:48px;
+  height:48px;
+  background:var(--accent);
+  color:white;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 8px 24px rgba(37,99,235,0.18);
+  cursor:pointer;
+  pointer-events: auto; /* always clickable */
+  z-index:1300; /* above the panel */
+  transition: transform .15s ease;
+}
+.button:hover{ transform: translateY(-3px) scale(1.03) }
+.panel{
+  width:360px; /* fixed pleasant width */
+  max-height:90vh;
+  background:#ffffff;
+  border-radius:12px; /* rounded corners */
+  box-shadow:0 12px 40px rgba(2,6,23,0.08); /* soft shadow */
+  border: 1.5px solid var(--accent); /* thin accent border */
+  overflow:hidden; /* clip outer overflow */
+  transform:translateY(12px) scale(.98);
+  opacity:0;
+  transition:transform .24s cubic-bezier(.2,.9,.2,1), opacity .24s;
+  display:flex;
+  flex-direction:column;
+  pointer-events: none; /* prevent clicks when closed */
+  visibility: hidden;
+  padding: 0; /* internal padding handled by header/body */
+}
+.container.open .panel{
+  transform:translateY(0) scale(1);
+  opacity:1;
+  pointer-events: auto;
+  visibility: visible;
+}
+.container.open { pointer-events: auto; }
+.open { --ai-open: 1; }
+.header{
+  position: relative; /* allow absolute positioning of close */
+  padding:14px 18px; /* slightly larger padding for breathing room */
+  border-bottom:none; /* remove subtle divider to integrate header with panel */
+  display:flex;
+  align-items:center;
+  justify-content:center; /* center title */
+  background: #ffffff;
+  flex-direction:column; /* stack title and subtitle */
+  gap:6px;
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+}
+.header h4{
+  margin:0;
+  font-size:20px; /* larger for prominence */
+  font-weight:900; /* stronger weight for clear title */
+  color: #071033; /* slightly richer dark-blue for warmth */
+  text-align:center;
+  letter-spacing:0.2px;
+  line-height:1.08;
+  margin-bottom:0;
+}
+.greeting{
+  margin:0;
+  font-size:16px; /* bigger friendly greeting */
+  font-weight:800;
+  color:#0b1220;
+  text-align:center;
+}
+.lead{
+  margin:0;
+  font-size:13.5px;
+  font-weight:600;
+  color:#334155; /* slightly darker muted tone for better readability */
+  text-align:center;
+  max-width:92%;
+  margin-inline:auto;
+  line-height:1.4;
+  opacity:0.98;
+}
+.header .modeTitle{
+  margin-top:8px;
+  font-size:14px;
+  font-weight:700;
+  color:#0b1220;
+}
+.modeLabel{
+  margin-top:8px;
+  font-size:14px;
+  font-weight:700;
+  color: var(--accent);
+  text-align:center;
+  width:100%;
+}
+
+/* Mode selector buttons (restored) */
+.modeButtons{
+  display:flex;
+  gap:8px;
+  margin-top:8px;
+  align-items:center;
+  justify-content:center;
+  pointer-events: auto; /* allow clicks when visible */
+}
+
+.modeBtn{
+  background: transparent;
+  border: 1px solid transparent;
+  padding:8px 12px;
+  border-radius:999px; /* pill */
+  font-weight:700;
+  font-size:14px;
+  color: var(--accent);
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  cursor:pointer;
+  transition: background .18s cubic-bezier(.2,.9,.2,1), transform .18s cubic-bezier(.2,.9,.2,1), box-shadow .18s cubic-bezier(.2,.9,.2,1), opacity .18s ease;
+}
+
+.modeBtn:hover{
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 14px 28px rgba(37,99,235,0.12);
+  opacity: 0.98;
+}
+
+.modeBtn:focus-visible{
+  outline: 3px solid rgba(37,99,235,0.14);
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .modeBtn, .button { transition: none !important; transform: none !important; }
+}
+
+.modeBtnWorkshop{ background: linear-gradient(135deg, #60a5fa, #818cf8); color: #fff }
+.modeBtnDiagnoser{ background: linear-gradient(135deg, #a78bfa, #ec4899); color: #fff }
+
+.body{
+  padding:16px 18px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  overflow:auto; /* only internal scroll */
+  max-height: calc(90vh - 96px); /* leave space for header */
+  background: #ffffff;
+}
+.input{
+  padding:8px 10px;
+  border:1px solid #e6e9f0;
+  border-radius:8px;
+  width:100%;
+  box-sizing:border-box;
+}
+.send{
+  background:var(--accent);
+  color:white;
+  border:none;
+  padding:8px 12px;
+  border-radius:8px;
+  cursor:pointer;
+}
+.close{
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #333;
+  position: absolute;
+  right: 12px;
+  top: 12px;
+  padding:6px; /* larger hit area */
+  border-radius:8px;
+}
+.close:hover{ background: rgba(2,6,23,0.04) }
+
+@media (max-width:720px){
+  .container{ right:12px; bottom:16px }
+  .panel{ width:92vw; margin-right: 20px; }
+  .button{ left: 12px; bottom: 12px }
+}
+@media (max-width:420px){
+  .header h4{ font-size:15px }
+  .header .subtitle{ font-size:12px }
+  .panel{ width:92vw }
+  .modeButtons{ flex-wrap:wrap; gap:6px }
+  .modeBtn{ padding:8px 12px; font-size:14px }
+}

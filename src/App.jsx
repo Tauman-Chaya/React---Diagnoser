@@ -1,5 +1,3 @@
-
-
 import React, { useState } from 'react';
 import { Routes, Route, NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
@@ -22,6 +20,7 @@ import WorkshopDetails from './features/WorkShop/WorkshopDetails';
 import OrderOfCusatomer from './features/Customers/OrderOfCusatomer';
 import DiagnoserCalendar from './features/Calendar/DiagnoserCalendar';
 import WorkshopAI from './features/AI/WorkshopAI';
+import BotSidebar from './components/BotSidebar/BotSidebar';
 import { UserCircle } from "lucide-react";
 import UserMenu from './features/SignIn/UserMenu';
 import { InitCustomer } from './features/Customers/CustomerSlice';
@@ -114,6 +113,7 @@ function App() {
 
         </Routes>
       </div>
+      <BotSidebar />
     </div>
   );
 }

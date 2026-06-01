@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addWorkShop, InitWorkShops } from './WorkShopSlice';
@@ -183,7 +182,7 @@ function AddWorkshopModal({ open, onClose }) {
                                     <option value={0}>בחר מאבחנת</option>
                                     {diagnosersCan?.map(d => <option key={d.code} value={d.code}>{d.name} - {d.mail}</option>)}
                                 </select> :
-                                <p>{user.name}</p>}
+                                <p>{user?.name || ''}</p>}
                         </div>
 
                         <button

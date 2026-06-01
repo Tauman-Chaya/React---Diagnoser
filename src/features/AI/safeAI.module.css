@@ -15,6 +15,8 @@
   flex-direction: column;
   align-items: center;
   position: relative;
+
+  background: #ffffff; /* Ensure all container backgrounds are white to match the bot panel */
 }
 
 /* אזור ההודעות */
@@ -26,6 +28,8 @@
   width: 100%;
 
   padding-bottom: 90px;
+
+  background: #ffffff; /* Ensure all container backgrounds are white to match the bot panel */
 }
 
 /* ===== BOT ===== */
@@ -103,7 +107,7 @@
 .loadingOverlay {
   position: fixed;
   inset: 0;
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.95); /* Make loading overlay white-transparent but keep spinner visible */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -191,6 +195,8 @@
   border: 1px solid rgba(96,165,250,0.15);
 
   animation: fadeIn 0.4s ease;
+
+  background: #ffffff; /* Ensure all container backgrounds are white to match the bot panel */
 }
 
 /* כותרת ראשית */
@@ -200,6 +206,7 @@
   font-weight: 900;
 
   background: linear-gradient(135deg, #60a5fa, #a78bfa);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -219,39 +226,52 @@
 
 .modeButtons {
   display: flex;
-  gap: 20px;
+  gap: 12px;
   justify-content: center;
-  margin-top: 28px;
-  flex-wrap: wrap;
+  margin-top: 12px;
+  flex-wrap: nowrap; /* keep buttons on one line */
+  overflow-x: hidden; /* hide any overflow */
+  padding-bottom: 6px;
+
+  pointer-events: auto; /* ensure buttons are clickable when moved */
+  z-index: 10;
 }
 
 .modeBtn {
-  position: relative;
-
-  padding: 18px 28px;
-  min-width: 240px;
-
+  padding: 8px 12px;
+  min-width: 88px;
+  max-width: 120px;
+  flex: 0 0 auto;
   border: none;
-  border-radius: 22px;
+  border-radius: 20px;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative; /* allow pseudo and icon positioning */
+  gap: 8px;
 
-  background: linear-gradient(135deg, #60a5fa, #a78bfa);
+  pointer-events: auto; /* ensure button receives events */
+  z-index: 11;
+}
 
-  color: white;
-  font-size: 18px;
-  font-weight: 800;
+.modeBtn .btnIcon{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:20px;
+  height:20px;
+}
 
-  cursor: pointer;
+.modeBtn .btnLabel{
+  display:inline-block;
+  white-space:nowrap;
+}
 
-  transition:
-    transform 0.22s ease,
-    box-shadow 0.22s ease,
-    opacity 0.22s ease;
-
-  box-shadow:
-    0 10px 28px rgba(96, 165, 250, 0.25),
-    0 6px 18px rgba(167, 139, 250, 0.18);
-
-  overflow: hidden;
+@media (max-width:420px) {
+  .modeBtn { min-width: 72px; font-size:14px }
 }
 
 .modeBtn::before {
