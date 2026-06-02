@@ -16,7 +16,7 @@
 }
 .button{
   position: fixed; /* fixed to viewport so it doesn't affect layout */
-  left: 16px; /* distance from viewport left edge */
+  right: 16px; /* distance from viewport right edge */
   bottom: 16px; /* distance from viewport bottom edge */
   width:48px;
   height:48px;
@@ -34,7 +34,7 @@
 }
 .button:hover{ transform: translateY(-3px) scale(1.03) }
 .panel{
-  width:360px; /* fixed pleasant width */
+  width:360px; /* start compact - expand only when conversation begins */
   max-height:90vh;
   background:#ffffff;
   border-radius:12px; /* rounded corners */
@@ -43,7 +43,7 @@
   overflow:hidden; /* clip outer overflow */
   transform:translateY(12px) scale(.98);
   opacity:0;
-  transition:transform .24s cubic-bezier(.2,.9,.2,1), opacity .24s;
+  transition:transform .24s cubic-bezier(.2,.9,.2,1), opacity .24s, width .22s ease, max-height .32s cubic-bezier(.2,.9,.2,1), padding .18s ease;
   display:flex;
   flex-direction:column;
   pointer-events: none; /* prevent clicks when closed */
@@ -55,6 +55,8 @@
   opacity:1;
   pointer-events: auto;
   visibility: visible;
+  /* when opened but no selectedMode, keep compact height so panel feels like header-only */
+  max-height: 260px;
 }
 .container.open { pointer-events: auto; }
 .open { --ai-open: 1; }
@@ -87,6 +89,7 @@
   color:#0b1220;
   text-align:center;
 }
+
 .lead{
   margin:0;
   font-size:13.5px;
@@ -97,6 +100,7 @@
   margin-inline:auto;
   line-height:1.4;
   opacity:0.98;
+  margin-bottom:6px; /* small gap below each lead line */
 }
 .header .modeTitle{
   margin-top:8px;
@@ -105,7 +109,7 @@
   color:#0b1220;
 }
 .modeLabel{
-  margin-top:8px;
+  margin-top:4px; /* reduce extra space above the label */
   font-size:14px;
   font-weight:700;
   color: var(--accent);
@@ -117,7 +121,7 @@
 .modeButtons{
   display:flex;
   gap:8px;
-  margin-top:8px;
+  margin-top:6px; /* keep a small consistent gap between label and buttons */
   align-items:center;
   justify-content:center;
   pointer-events: auto; /* allow clicks when visible */
@@ -196,7 +200,7 @@
 @media (max-width:720px){
   .container{ right:12px; bottom:16px }
   .panel{ width:92vw; margin-right: 20px; }
-  .button{ left: 12px; bottom: 12px }
+  .button{ right: 12px; bottom: 12px }
 }
 @media (max-width:420px){
   .header h4{ font-size:15px }
@@ -204,4 +208,12 @@
   .panel{ width:92vw }
   .modeButtons{ flex-wrap:wrap; gap:6px }
   .modeBtn{ padding:8px 12px; font-size:14px }
+}
+
+.container.expanded .panel{
+  /* expand both width and height when conversation starts */
+  width:520px; /* wider panel when expanded */
+  max-height:95vh; /* very tall for full conversation view */
+  height:95vh;
+  overflow: hidden;
 }

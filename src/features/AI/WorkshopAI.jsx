@@ -22,7 +22,7 @@ import LoginRequiredModal from "./LoginRequiredModal";
 import DiagnoserResult from "./DiagnoserResult ";
 
 
-const WorkshopAI = ({ sidebarOpen, sidebarInputRef, externalMode }) => {
+const WorkshopAI = ({ sidebarOpen, sidebarInputRef, externalMode, onConversationStart }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -110,6 +110,8 @@ const WorkshopAI = ({ sidebarOpen, sidebarInputRef, externalMode }) => {
 
     setLoadingMode(false);
     setOpen(true);
+    // notify parent that conversation started so it can expand panel
+    if (typeof onConversationStart === 'function') onConversationStart();
   };
 
   // =========================

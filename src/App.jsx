@@ -19,7 +19,6 @@ import { useLocation } from "react-router-dom";
 import WorkshopDetails from './features/WorkShop/WorkshopDetails';
 import OrderOfCusatomer from './features/Customers/OrderOfCusatomer';
 import DiagnoserCalendar from './features/Calendar/DiagnoserCalendar';
-import WorkshopAI from './features/AI/WorkshopAI';
 import BotSidebar from './components/BotSidebar/BotSidebar';
 import { UserCircle } from "lucide-react";
 import UserMenu from './features/SignIn/UserMenu';
@@ -80,7 +79,7 @@ function App() {
           <NavLink to="/Diagnosers" className={({ isActive }) => isActive ? styles.active : styles.link}>מאבחנות</NavLink>
           <NavLink to="/Workshop" className={({ isActive }) => isActive ? styles.active : styles.link}>סדנאות</NavLink>
 
-          <NavLink to="/AI" className={({ isActive }) => isActive ? styles.active : styles.link}>לחיפוש מהיר</NavLink>
+          {/* <NavLink to="/AI" className={({ isActive }) => isActive ? styles.active : styles.link}>לחיפוש מהיר</NavLink> */}
         </nav>
       )}
 
@@ -92,9 +91,7 @@ function App() {
           {/* כל שאר הדפים זמינים רק אחרי לחיצה */}
 
           <>
-            {/* <Route path="/AI" element={<WorkshopAI />} /> */}
             <Route path="/enter" element={<LogIn />} />
-            <Route path="/AI" element={<WorkshopAI />} />
             <Route path="/Workshop" element={<Workshop />} />
             <Route path="/Customers" element={<CustomersList />} />
             <Route path="/Diagnosers" element={<DiagnoserList />} />
@@ -113,7 +110,7 @@ function App() {
 
         </Routes>
       </div>
-      <BotSidebar />
+      {hasAccess && <BotSidebar />}
     </div>
   );
 }

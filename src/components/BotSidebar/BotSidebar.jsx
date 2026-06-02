@@ -5,7 +5,15 @@ import WorkshopAI from '../../features/AI/WorkshopAI';
 
 export default function BotSidebar() {
   const [open, setOpen] = useState(false);
-  const toggle = () => setOpen(v => !v);
+  const [expanded, setExpanded] = useState(false);
+  const toggle = () => setOpen(v => {
+    const next = !v;
+    if (!next) {
+      setSelectedMode(null); // when closing, reset selected mode so panel collapses
+      setExpanded(false);
+    }
+    return next;
+  });
   const inputRef = useRef(null);
   const [selectedMode, setSelectedMode] = useState(null);
 
@@ -14,7 +22,7 @@ export default function BotSidebar() {
   }, [open]);
 
   return (
-    <div className={`${styles.container} ${open ? styles.open : ''}`}>
+    <div className={`${styles.container} ${open ? styles.open : ''} ${expanded ? styles.expanded : ''}`}>
       <div className={styles.button} onClick={toggle} aria-label="Toggle bot">
         {open ? <X size={18} /> : <MessageSquare size={18} />}
       </div>
@@ -55,7 +63,7 @@ export default function BotSidebar() {
         </div>
         <div className={styles.body}>
           {/* Render existing AI bot component from features/AI, pass ref and open state */}
-          <WorkshopAI sidebarOpen={open} sidebarInputRef={inputRef} externalMode={selectedMode} />
+          <WorkshopAI sidebarOpen={open} sidebarInputRef={inputRef} externalMode={selectedMode} onConversationStart={() => setExpanded(true)} />
         </div>
       </div>
     </div>

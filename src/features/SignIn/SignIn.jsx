@@ -99,7 +99,7 @@ const SignIn = () => {
 
         dispatch(signIn(newCustomer));
         dispatch(addLead(newCustomer)).unwrap();
-        navigate("../AI");
+        navigate("/Profile");
     }
 
     const isFormValid = name && mail && password && phone && status;
