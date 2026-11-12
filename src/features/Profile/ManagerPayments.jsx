@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { FaUser, FaEnvelope, FaPhone, FaDollarSign, FaEye } from 'react-icons/fa';
 import DiagnoserOrdersPopup from './DiagnoserOrdersPopup';
 import styles from './ManagerPayments.module.css';
+import { MANAGER_EMAIL } from '../../config';
 import { InitReferences } from '../References/ReferencesSlice';
 import { InitWorkShops } from '../WorkShop/WorkShopSlice';
 import { InitDiagnoser } from '../Diagnosers/DiagnoserSlice';
@@ -114,7 +115,7 @@ const ManagerPayments = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {filteredSlots.filter(d => d.mail !== "st0527144149@gmail.com").map((d, i) => (
+                        {filteredSlots.filter(d => d.mail !== MANAGER_EMAIL).map((d, i) => (
                             <tr
                                 key={i}
                                 className={Number(d.precentagePayment) > 10000 ? styles["red-row"] : ""}

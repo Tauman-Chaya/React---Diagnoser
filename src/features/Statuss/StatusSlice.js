@@ -1,3 +1,4 @@
+import { API_URL } from "../../config";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios"
 
@@ -5,7 +6,7 @@ import axios from "axios"
 export const fetchStatus = createAsyncThunk(
     'StatusSlice/fetchAll',
     async () => {
-        const res = await axios.get('https://localhost:7082/Statuses/ReadAll');
+        const res = await axios.get(`${API_URL}/Statuses/ReadAll`);
         return res.data;
     }
 );

@@ -1,3 +1,4 @@
+import { API_URL } from "../../config";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
@@ -10,7 +11,7 @@ export const TypeDescription = createAsyncThunk('TypeDescription',
     async (codeType, { rejectWithValue }) => {
         try {
             const res = await axios.post(
-                'https://localhost:7082/api/WorkShops/Type', 
+                `${API_URL}/api/WorkShops/Type`, 
                 { code: codeType }, 
                 { headers }
             );

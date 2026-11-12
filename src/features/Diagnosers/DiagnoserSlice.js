@@ -1,3 +1,4 @@
+import { API_URL } from "../../config";
 // import { createSlice } from "@reduxjs/toolkit";
 // import { GrFavorite } from "react-icons/gr";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
@@ -15,7 +16,7 @@ const headers = {
 export const InitDiagnoser = createAsyncThunk("InitDiagnosers",
     async () => {
         let data
-        await axios.get('https://localhost:7082/Diagnosers/ReadAll').then(res => {
+        await axios.get(`${API_URL}/Diagnosers/ReadAll`).then(res => {
             data = res.data
         }) 
         return data
@@ -23,7 +24,7 @@ export const InitDiagnoser = createAsyncThunk("InitDiagnosers",
 
 export const addDiagnoser = createAsyncThunk("addDiagnoser",
     async (diagnoser) => {
-        await axios.post('https://localhost:7082/Diagnosers/Add', diagnoser,
+        await axios.post(`${API_URL}/Diagnosers/Add`, diagnoser,
             {
                 headers: headers
             }).then(res => { })
@@ -32,7 +33,7 @@ export const addDiagnoser = createAsyncThunk("addDiagnoser",
 
 export const deleteDiagnoser = createAsyncThunk("deleteDiagnoser",
     async (diagnoser) => {
-        await axios.delete('https://localhost:7082/Diagnosers/Delete', 
+        await axios.delete(`${API_URL}/Diagnosers/Delete`, 
             {
                 headers: headers,
                 data:diagnoser
@@ -43,7 +44,7 @@ export const deleteDiagnoser = createAsyncThunk("deleteDiagnoser",
 
 export const updateDiagnoser = createAsyncThunk("updateDiagnoser",
     async (diagnoser) => {
-        await axios.post('https://localhost:7082/Diagnosers/Update', diagnoser,
+        await axios.post(`${API_URL}/Diagnosers/Update`, diagnoser,
             {
                 headers: headers
             }
@@ -55,7 +56,7 @@ export const payToManager = createAsyncThunk(
   "payToManager",
   async ({ code, num }) => {
     await axios.post(
-      `https://localhost:7082/Diagnosers/PayToManager/${num}/${code}`,
+      `${API_URL}/Diagnosers/PayToManager/${num}/${code}`,
       {},
       { headers: headers }
     );

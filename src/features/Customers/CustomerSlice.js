@@ -1,3 +1,4 @@
+import { API_URL } from "../../config";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios"
 
@@ -14,7 +15,7 @@ const headers = {
 export const InitCustomer = createAsyncThunk("InitCustomers",
     async () => {
         let data
-        await axios.get('https://localhost:7082/Customers/ReadAll').then(res => {
+        await axios.get(`${API_URL}/Customers/ReadAll`).then(res => {
             data = res.data
         })
         return data
@@ -22,7 +23,7 @@ export const InitCustomer = createAsyncThunk("InitCustomers",
 
 export const addCustomer = createAsyncThunk("addCustomer",
     async (Customer) => {
-        await axios.post('https://localhost:7082/Customers/Add', Customer,
+        await axios.post(`${API_URL}/Customers/Add`, Customer,
             {
                 headers: headers
             }).then(res => { })
@@ -31,7 +32,7 @@ export const addCustomer = createAsyncThunk("addCustomer",
 
 export const deleteCustomer = createAsyncThunk("deleteCustomer",
     async (Customer) => {
-        axios.delete('https://localhost:7082/Customers/Delete', {
+        axios.delete(`${API_URL}/Customers/Delete`, {
             data: Customer,
             headers
         }).then(res => { })
@@ -40,7 +41,7 @@ export const deleteCustomer = createAsyncThunk("deleteCustomer",
 
 export const updateCustomer = createAsyncThunk("updateCustomer",
     async (Customer) => {
-        await axios.post('https://localhost:7082/Customers/Update', Customer,
+        await axios.post(`${API_URL}/Customers/Update`, Customer,
             {
                 headers: headers
             }

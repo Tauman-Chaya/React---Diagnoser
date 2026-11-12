@@ -19,7 +19,7 @@ import { useNavigate } from "react-router-dom";
 import remarkGfm from "remark-gfm";
 import OrderWorkshop from "../WorkShop/OrderWorkshop";
 import LoginRequiredModal from "./LoginRequiredModal";
-import DiagnoserResult from "./DiagnoserResult ";
+import DiagnoserResult from "./DiagnoserResult";
 
 
 const WorkshopAI = ({ sidebarOpen, sidebarInputRef, externalMode, onConversationStart }) => {

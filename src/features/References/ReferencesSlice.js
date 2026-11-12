@@ -1,3 +1,4 @@
+import { API_URL } from "../../config";
 
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
@@ -15,21 +16,21 @@ const headers = {
 // --- Async Thunks ---
 export const InitReferences = createAsyncThunk("InitReferences",
     async () => {
-        const res = await axios.get('https://localhost:7082/References/ReadAll');
+        const res = await axios.get(`${API_URL}/References/ReadAll`);
         return res.data;
     }
 )
 
 export const addReference = createAsyncThunk("addReference",
     async (Reference) => {
-        const res = await axios.post('https://localhost:7082/References/Add', Reference, { headers });
+        const res = await axios.post(`${API_URL}/References/Add`, Reference, { headers });
         return res.data; // מחזיר את מה שהשרת מחזיר
     }
 )
 
 export const deleteReference = createAsyncThunk("deleteReference",
     async (Reference) => {
-        await axios.delete('https://localhost:7082/References/Delete', {
+        await axios.delete(`${API_URL}/References/Delete`, {
             headers,
             data: Reference
         });
@@ -39,14 +40,14 @@ export const deleteReference = createAsyncThunk("deleteReference",
 
 export const updateReference = createAsyncThunk("updateReference",
     async (Reference) => {
-        await axios.put('https://localhost:7082/References/Update', Reference, { headers });
+        await axios.put(`${API_URL}/References/Update`, Reference, { headers });
         return Reference;
     }
 )
 
 export const closeOrder = createAsyncThunk("closeOrder",
     async (code, { dispatch }) => {
-        await axios.put('https://localhost:7082/References/CloseOrder/' + code, { headers });
+        await axios.put(`${API_URL}/References/CloseOrder/` + code, { headers });
         // 🔹 תיקן: הוספתי dispatch כדי לרענן את הרשימה
         dispatch(InitReferences());
     }
@@ -54,7 +55,7 @@ export const closeOrder = createAsyncThunk("closeOrder",
 
 export const pay = createAsyncThunk("pay",
     async (code, { dispatch }) => {
-        await axios.put(`https://localhost:7082/References/Pay/${code}`);
+        await axios.put(`${API_URL}/References/Pay/${code}`);
         dispatch(InitReferences());
     }
 )

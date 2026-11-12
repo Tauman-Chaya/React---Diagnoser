@@ -1,3 +1,4 @@
+import { API_URL, MANAGER_EMAIL } from "../../config";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios"
 import { ProfilelogIn } from "../Profile/ProfileSlice";
@@ -14,7 +15,7 @@ const headers = {
 export const addLead = createAsyncThunk("addLead",
     async (lead) => {
         let data
-        await axios.post('https://localhost:7082/Leads/Add', lead,
+        await axios.post(`${API_URL}/Leads/Add`, lead,
             {
                 headers: headers
             }).then(res => {
@@ -56,7 +57,7 @@ const LogInSlice = createSlice({
             }
             else {
                 const diagnoser = Diagnosers.find(c => c.mail == user.mail && c.password == user.password)
-                if (diagnoser != null && diagnoser.mail == "st0527144149@gmail.com") {
+                if (diagnoser != null && diagnoser.mail == MANAGER_EMAIL) {
                     state.statusUser = "Esty"
                     state.thisUser = diagnoser
                 }

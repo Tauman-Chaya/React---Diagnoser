@@ -8,9 +8,10 @@ import { store } from './app/store';
 import { Provider } from 'react-redux';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import BackgroundWrapper from './BackgroundWrapper';
+import { GOOGLE_CLIENT_ID } from './config';
 
-// הכנס כאן את Client ID שלך מ-Google
-const clientId = "850793628922-mt77pmp9fmc7g37307q7316kqier689d.apps.googleusercontent.com";
+// מזהה Google מוגדר ב-src/config.js
+const clientId = GOOGLE_CLIENT_ID;
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

@@ -1,3 +1,4 @@
+import { API_URL } from "../../config";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
@@ -15,7 +16,7 @@ export const sendEmail = createAsyncThunk(
     "sendEmail",
     async ({ toEmail, subject, body }, { rejectWithValue }) => {
         // try {
-            const response = await axios.post('https://localhost:7082/api/Email/SendEmail', {
+            const response = await axios.post(`${API_URL}/api/Email/SendEmail`, {
                 ToEmail: toEmail,
                 Subject: subject,
                 Body: body

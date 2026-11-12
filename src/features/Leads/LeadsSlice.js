@@ -1,3 +1,4 @@
+import { API_URL } from "../../config";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios"
 
@@ -14,14 +15,14 @@ const headers = {
 
     export const InitLeads = createAsyncThunk("InitLeads",
     async () => {
-        const res = await axios.get('https://localhost:7082/Leads/ReadAll');
+        const res = await axios.get(`${API_URL}/Leads/ReadAll`);
         // console.log(res.data); // חשוב
         return res.data;
     })
 
 // export const addLead = createAsyncThunk("addLead",
 //     async (Lead) => {
-//         await axios.post('https://localhost:7082/Leads/Add', Lead,
+//         await axios.post(`${API_URL}/Leads/Add`, Lead,
 //             {
 //                 headers: headers
 //             }).then(res => { })
@@ -30,7 +31,7 @@ const headers = {
 
 export const deleteLead = createAsyncThunk("deleteLead",
     async (Lead) => {
-        await axios.delete('https://localhost:7082/Leads/Delete', {
+        await axios.delete(`${API_URL}/Leads/Delete`, {
             data: Lead,
             headers: headers
         }).then(res => { })
@@ -39,7 +40,7 @@ export const deleteLead = createAsyncThunk("deleteLead",
 
 // export const updateLead = createAsyncThunk("updateLead",
 //     async (Lead) => {
-//         await axios.post('https://localhost:7082/Leads/Update', Lead,
+//         await axios.post(`${API_URL}/Leads/Update`, Lead,
 //             {
 //                 headers: headers
 //             }

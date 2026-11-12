@@ -1,3 +1,4 @@
+import { API_URL } from "../../config";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios"
 
@@ -15,7 +16,7 @@ const headers = {
 export const InitWorkShops = createAsyncThunk("InitWorkShops",
     async () => {
         let data
-        await axios.get('https://localhost:7082/api/WorkShops/ReadAll').then(res => {
+        await axios.get(`${API_URL}/api/WorkShops/ReadAll`).then(res => {
             data = res.data
         })
         return data
@@ -26,7 +27,7 @@ export const InitWorkShops = createAsyncThunk("InitWorkShops",
 export const GetWorkShop = createAsyncThunk("GetWorkShop",
     async (code) => {
         let data
-        await axios.get('https://localhost:7082/api/WorkShops/Read/' + code
+        await axios.get(`${API_URL}/api/WorkShops/Read/` + code
         ).then(res =>
             data = res.data
         )
@@ -36,7 +37,7 @@ export const GetWorkShop = createAsyncThunk("GetWorkShop",
 
 export const addWorkShop = createAsyncThunk("addWorkShop",
     async (WorkShop) => {
-        await axios.post('https://localhost:7082/api/WorkShops/Add', WorkShop,
+        await axios.post(`${API_URL}/api/WorkShops/Add`, WorkShop,
             {
                 headers: headers
             }).then(res => { WorkShop.code = res.data })
@@ -45,7 +46,7 @@ export const addWorkShop = createAsyncThunk("addWorkShop",
 
 export const deleteWorkShop = createAsyncThunk("deleteWorkShop",
     async (WorkShop) => {
-        await axios.delete('https://localhost:7082/api/WorkShops/Delete',
+        await axios.delete(`${API_URL}/api/WorkShops/Delete`,
             {
                 headers: headers,
                 data: WorkShop
@@ -56,7 +57,7 @@ export const deleteWorkShop = createAsyncThunk("deleteWorkShop",
 
 export const updateWorkShop = createAsyncThunk("updateWorkShop",
     async (WorkShop) => {
-        await axios.put('https://localhost:7082/api/WorkShops/Update', WorkShop,
+        await axios.put(`${API_URL}/api/WorkShops/Update`, WorkShop,
             {
                 headers: headers
             }
@@ -68,7 +69,7 @@ export const updateWorkShop = createAsyncThunk("updateWorkShop",
 export const getType = createAsyncThunk('getType',
     async (workShop, { rejectWithValue }) => {
         try {
-            const res = await axios.post('https://localhost:7082/api/WorkShops/Type', workShop, { headers });
+            const res = await axios.post(`${API_URL}/api/WorkShops/Type`, workShop, { headers });
             return res.data;
         } catch (err) {
             return rejectWithValue(err.response?.data || err.message);
@@ -80,7 +81,7 @@ export const getType = createAsyncThunk('getType',
 // export const GetWorkShop = createAsyncThunk("GetWorkShop",
 //     async (code) => {
 //         let data
-//         await axios.get('https://localhost:7082/api/WorkShops/Read/' + code
+//         await axios.get(`${API_URL}/api/WorkShops/Read/` + code
 //         ).then(res =>
 //             data = res.data
 //         )
@@ -91,7 +92,7 @@ export const getType = createAsyncThunk('getType',
 export const GetDiagnosersOfThisWorkshop = createAsyncThunk("GetDiagnosersOfThisWorkshop",
     async (workshop) => {
         let data
-        await axios.get('https://localhost:7082/api/WorkShops/GetLDiagnosers/' + 
+        await axios.get(`${API_URL}/api/WorkShops/GetLDiagnosers/` + 
             workshop.morfology + '/' + workshop.grafology + '/' + workshop.chirology + '/' + workshop.typeGroup)
             .then(res =>
                 data = res.data
@@ -103,7 +104,7 @@ export const GetDiagnosersOfThisWorkshop = createAsyncThunk("GetDiagnosersOfThis
 export const GetDiagnosersOfConditions = createAsyncThunk("GetDiagnosersOfConditions",
     async ({ c, g, m }) => {
         let data
-        await axios.get('https://localhost:7082/Diagnosers/GetDiagnosers/' + c + '/' + g + '/' + m)
+        await axios.get(`${API_URL}/Diagnosers/GetDiagnosers/` + c + '/' + g + '/' + m)
             .then(res =>
                 data = res.data
             )
@@ -114,7 +115,7 @@ export const GetDiagnosersOfConditions = createAsyncThunk("GetDiagnosersOfCondit
 export const GetWorkShops = createAsyncThunk("GetWorkShops",
     async ({ c, g, m, typeGroup }) => {
         let data
-        await axios.get('https://localhost:7082/api/WorkShops/GetWorkShops/' + c + '/' + g + '/' + m + '/' + typeGroup)
+        await axios.get(`${API_URL}/api/WorkShops/GetWorkShops/` + c + '/' + g + '/' + m + '/' + typeGroup)
             .then(res =>
                 data = res.data
             )

@@ -1,10 +1,11 @@
+import { API_URL } from "../../config";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios"
 
 
 export const TypeGroups = createAsyncThunk('TypeGroups',
     async () => {
-        const res = await axios.get('https://localhost:7082/ReadAll');
+        const res = await axios.get(`${API_URL}/ReadAll`);
         return res.data;
     }
 );

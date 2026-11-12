@@ -1,3 +1,4 @@
+import { API_URL } from "../../config";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
@@ -19,7 +20,7 @@ export const GetAIQuestions = createAsyncThunk(
     "WorkshopAI/GetAIQuestions",
     async (type) => {
         const res = await axios.get(
-            `https://localhost:7082/api/AI/questions/${type}`
+            `${API_URL}/api/AI/questions/${type}`
         );
 
         return res.data;
@@ -42,7 +43,7 @@ export const SendAnswersToAI = createAsyncThunk(
         };
         try {
             const res = await axios.post(
-                `https://localhost:7082/api/AI/recommend/${type}`,
+                `${API_URL}/api/AI/recommend/${type}`,
                 body,
                 {
                     headers: {
