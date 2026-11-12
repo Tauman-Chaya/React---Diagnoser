@@ -57,11 +57,9 @@
 
 <div align="center">
 
-<a href="docs/media/ai-bot-demo.mp4">
-  <img src="docs/media/ai-bot-demo-poster.png" alt="דמו של בוט ה-AI – לחצו לצפייה" width="820"/>
-</a>
+https://github.com/user-attachments/assets/61567ed2-f378-44c7-92e9-2089df5ff531
 
-<sub>▶️ לחצו על התמונה לצפייה בסרטון (32 שניות)</sub>
+<sub>🎬 32 שניות · מהשאלון ועד ההזמנה · <a href="docs/media/ai-bot-demo.mp4">פתיחה בדף נפרד</a></sub>
 
 </div>
 
